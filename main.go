@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 
 	"github.com/surapas3022/Tickets/movie"
 	"github.com/surapas3022/Tickets/ticket"
@@ -17,10 +18,11 @@ func main() {
 	mn, err := movie.FindNameJson(1)
 
 	if err != nil {
-		fmt.Println("Error:", err)
+		log.Fatalf("Error: %v\n", err) // This logs the error and stops the program
 	}
 
-	fmt.Println(mn)
+	fmt.Println("Movie Data: %+v\n", *mn)
+
 	ticket.BuyTicket(mn.Name, mn.Price)
 	movie.Review(mn.Name, 9.6)
 

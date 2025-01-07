@@ -6,17 +6,18 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/surapas3022/Tickets/utils"
-
 	_ "embed"
+
+	"github.com/surapas3022/Tickets/utils"
 )
+
+var cinemaJSON []byte
 
 var moviesCache []Movie
 var loadError error
 
 func init() {
 	moviesCache, loadError = LoadMovies("cinema.json")
-	moviesCache, loadError = LoadMoviesFromEmbed()
 }
 
 func FindName(imdbID string) string {
@@ -34,6 +35,10 @@ func FindNameJson(ID int) (*Movie, error) {
 		return nil, loadError
 	}
 
+	if moviesCache == nil {
+		return nil, errors.New("moviesCache is empty, JSON might not have loaded properly")
+	}
+
 	for _, movie := range moviesCache {
 		if movie.ID == ID {
 			return &movie, nil
@@ -47,31 +52,24 @@ func Review(name string, rating float64) {
 	fmt.Printf("I reviewed %s and it's rating is %.2f\n", name, utils.RoundToTwoDecimalPlaces(rating))
 }
 
-// LoadMovies loads movies from a JSON file
 func LoadMovies(filename string) ([]Movie, error) {
+	fmt.Println("Attempting to load file:", filename)
+
 	file, err := os.Open(filename)
 	if err != nil {
+		fmt.Println("Error opening file:", err)
 		return nil, err
 	}
 	defer file.Close()
 
-	// Unmarshal into a MovieData struct
 	var movieData MovieData
-	if err := json.NewDecoder(file).Decode(&movieData); err != nil {
+	decoder := json.NewDecoder(file)
+	if err := decoder.Decode(&movieData); err != nil {
+		fmt.Println("Error decoding JSON:", err)
 		return nil, err
 	}
 
-	// Return the movies slice
-	return movieData.Data, nil
-}
-
-var cinemaJSON []byte
-
-func LoadMoviesFromEmbed() ([]Movie, error) {
-	var movieData MovieData
-	if err := json.Unmarshal(cinemaJSON, &movieData); err != nil {
-		return nil, err
-	}
+	fmt.Println("Successfully loaded movies:", movieData)
 	return movieData.Data, nil
 }
 
