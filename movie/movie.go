@@ -7,6 +7,8 @@ import (
 	"os"
 
 	"github.com/surapas3022/Tickets/utils"
+
+	_ "embed"
 )
 
 var moviesCache []Movie
@@ -14,6 +16,7 @@ var loadError error
 
 func init() {
 	moviesCache, loadError = LoadMovies("cinema.json")
+	moviesCache, loadError = LoadMoviesFromEmbed()
 }
 
 func FindName(imdbID string) string {
@@ -59,6 +62,16 @@ func LoadMovies(filename string) ([]Movie, error) {
 	}
 
 	// Return the movies slice
+	return movieData.Data, nil
+}
+
+var cinemaJSON []byte
+
+func LoadMoviesFromEmbed() ([]Movie, error) {
+	var movieData MovieData
+	if err := json.Unmarshal(cinemaJSON, &movieData); err != nil {
+		return nil, err
+	}
 	return movieData.Data, nil
 }
 
