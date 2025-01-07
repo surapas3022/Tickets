@@ -1,0 +1,74 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "Avenger Infinities Wars",
+      "imdbID": "tt01",
+      "rating": 7.8,
+      "price": "$2.5"
+    },
+    {
+      "id": 2,
+      "name": "Iron Man",
+      "imdbID": "tt02",
+      "rating": 7.6,
+      "price": "$2.5"
+    },
+    {
+      "id": 3,
+      "name": "The Dark Knight",
+      "imdbID": "tt03",
+      "rating": 8.1,
+      "price": "$2.5"
+    },
+    {
+      "id": 4,
+      "name": "Inception",
+      "imdbID": "tt04",
+      "rating": 9.3,
+      "price": "$2.5"
+    },
+    {
+      "id": 5,
+      "name": "The Matrix",
+      "imdbID": "tt05",
+      "rating": 8.1,
+      "price": "$2.5"
+    },
+    {
+      "id": 6,
+      "name": "Interstellar",
+      "imdbID": "tt06",
+      "rating": 9.1,
+      "price": "$2.5"
+    },
+    {
+      "id": 7,
+      "name": "Guardians of the Galaxy",
+      "imdbID": "tt07",
+      "rating": 9.4,
+      "price": "$2.5"
+    },
+    {
+      "id": 8,
+      "name": "Thor: Ragnarok",
+      "imdbID": "tt08",
+      "rating": 8.7,
+      "price": "$2.5"
+    },
+    {
+      "id": 9,
+      "name": "Spider-Man: No Way Home",
+      "imdbID": "tt09",
+      "rating": 7.1,
+      "price": "$2.5"
+    },
+    {
+      "id": 10,
+      "name": "Doctor Strange",
+      "imdbID": "tt10",
+      "rating": 7.3,
+      "price": "$2.5"
+    }
+  ]
+}
