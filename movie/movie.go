@@ -15,7 +15,7 @@ var moviesCache []Movie
 var loadError error
 
 func init() {
-	moviesCache, loadError = LoadMovies("cinema.json")
+	moviesCache, loadError = LoadMovies("github.com/surapas3022/Tickets/cinema.json")
 }
 
 func FindName(imdbID string) string {
