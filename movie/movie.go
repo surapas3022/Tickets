@@ -11,8 +11,6 @@ import (
 	"github.com/surapas3022/Tickets/utils"
 )
 
-var cinemaJSON []byte
-
 var moviesCache []Movie
 var loadError error
 
