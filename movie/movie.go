@@ -17,9 +17,10 @@ var loadError error
 //go:embed cinema.json
 var cinemaJSON []byte // Embed the cinema.json file
 
-// func init() {
-// 	moviesCache, loadError = LoadMovies("cinema.json")
-// }
+func init() {
+	// moviesCache, loadError = LoadMovies("cinema.json")
+	moviesCache, loadError = LoadMoviesFromBytes(cinemaJSON)
+}
 
 func FindName(imdbID string) string {
 	switch imdbID {
@@ -66,6 +67,17 @@ func LoadMovies(filename string) ([]Movie, error) {
 	var movieData MovieData
 	decoder := json.NewDecoder(file)
 	if err := decoder.Decode(&movieData); err != nil {
+		fmt.Println("Error decoding JSON:", err)
+		return nil, err
+	}
+
+	fmt.Println("Successfully loaded movies:", movieData)
+	return movieData.Data, nil
+}
+
+func LoadMoviesFromBytes(data []byte) ([]Movie, error) {
+	var movieData MovieData
+	if err := json.Unmarshal(data, &movieData); err != nil {
 		fmt.Println("Error decoding JSON:", err)
 		return nil, err
 	}
