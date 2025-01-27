@@ -13,7 +13,7 @@ import (
 
 // Embedded JSON data
 //
-//go:embed cinema.json
+//go:embed
 var cinemaJSON []byte
 
 var MoviesCache []Movie
