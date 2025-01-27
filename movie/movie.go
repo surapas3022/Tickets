@@ -11,15 +11,17 @@ import (
 	"github.com/surapas3022/Tickets/utils"
 )
 
-var moviesCache []Movie
-var loadError error
-
+// Embedded JSON data
+//
 //go:embed cinema.json
-var cinemaJSON []byte // Embed the cinema.json file
+var cinemaJSON []byte
+
+var MoviesCache []Movie
+var LoadError error
 
 func init() {
-	// moviesCache, loadError = LoadMovies("cinema.json")
-	moviesCache, loadError = LoadMoviesFromBytes(cinemaJSON)
+	// MoviesCache, LoadError = LoadMovies("cinema.json")
+	MoviesCache, LoadError = LoadMoviesFromBytes(cinemaJSON)
 }
 
 func FindName(imdbID string) string {
@@ -33,15 +35,15 @@ func FindName(imdbID string) string {
 }
 
 func FindNameJson(ID int) (*Movie, error) {
-	if loadError != nil {
-		return nil, loadError
+	if LoadError != nil {
+		return nil, LoadError
 	}
 
-	if moviesCache == nil {
-		return nil, errors.New("moviesCache is empty, JSON might not have loaded properly")
+	if MoviesCache == nil {
+		return nil, errors.New("MoviesCache is empty, JSON might not have loaded properly")
 	}
 
-	for _, movie := range moviesCache {
+	for _, movie := range MoviesCache {
 		if movie.ID == ID {
 			return &movie, nil
 		}
