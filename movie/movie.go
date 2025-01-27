@@ -14,9 +14,12 @@ import (
 var moviesCache []Movie
 var loadError error
 
-func init() {
-	moviesCache, loadError = LoadMovies("cinema.json")
-}
+//go:embed cinema.json
+var cinemaJSON []byte // Embed the cinema.json file
+
+// func init() {
+// 	moviesCache, loadError = LoadMovies("cinema.json")
+// }
 
 func FindName(imdbID string) string {
 	switch imdbID {
